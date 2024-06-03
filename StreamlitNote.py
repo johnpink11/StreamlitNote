@@ -131,3 +131,149 @@ start_time = st.slider(
 st.write("Start time:", start_time)
 
 st.write('时间滑条与普通的滑条基本相同，只不过参数类型换为了`datetime`.')
+st.markdown('---')
+
+st.header("Draw a line chart(画折线图)")
+
+st.code('''chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['a', 'b', 'c']
+)
+st.line_chart(chart_data)''')
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['a', 'b', 'c']
+)
+st.line_chart(chart_data)
+
+st.markdown('这里传入的参数为`DataFrame`对象，也可以自己指定以下参数:')
+st.markdown('- `x`用来指定横坐标的参数 \n - `y`用于指定所要画出的那些数据 \n - `color`指定每组数据的颜色')
+st.markdown("**Example:**")
+st.code('''chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['col1', 'col2', 'col3']
+)
+st.line_chart(chart_data, x="col1", y=["col2", "col3"], color=["#FFOOOO", "#0000FF"])''')
+chart_data = pd.DataFrame(
+    np.random.randn(20, 3),
+    columns=['col1', 'col2', 'col3']
+)
+
+st.line_chart(
+              chart_data, 
+              x="col1", y=["col2", "col3"],
+              color=["#FFOOOO", "#0000FF"]
+)
+
+st.header("Checkboxes")
+
+st.code('''if is_checked:
+    chart_data = pd.DataFrame(
+        np.random.randn(20, 3),
+        columns=['a', 'b', 'c']
+    )
+    chart_data
+''')
+
+is_checked = st.checkbox('Show dataframe')
+if is_checked:
+    chart_data = pd.DataFrame(
+        np.random.randn(20, 3),
+        columns=['a', 'b', 'c']
+    )
+    chart_data
+
+st.markdown('`st.checkbox`是一个选择框, 这个函数会返回一个bool值, 如果被选中返回`true`, 未被选中返回`false`')
+
+st.header("Selectbox")
+st.markdown('`selectbox`可以用来提供选择, 同时返回用户的选择')
+
+
+st.code('''option = st.selectbox("What is your favoriate animal?",
+            ('Cat', 'Dog', 'Elephant','Pig'))
+
+st.write('Your favoriate animal is ', option)
+''')
+
+option = st.selectbox("What is your favoriate animal?",
+            ('Cat', 'Dog', 'Elephant','Pig'))
+
+st.write('Your favoriate animal is ', option)
+
+
+st.header('Multiselect(多选框)')
+st.markdown('`st.multiselect`允许用户选择多个选项, 返回一个可迭代对象, 内容为用户选择的选项')
+
+st.code('''options = st.multiselect(
+     'What are your favorite colors',
+     ['Cat', 'Dog', 'Elephant','Pig'],
+     ['Cat', 'Dog'])
+
+
+st.markdown("**Your favorite animal list:**")
+for option in options:
+    st.markdown(f"- {option}")''')
+
+options = st.multiselect(
+     'What are your favorite colors',
+     ['Cat', 'Dog', 'Elephant','Pig'],
+     ['Cat', 'Dog'])
+
+
+st.markdown("**Your favorite animal list:**")
+for option in options:
+    st.markdown(f"- {option}")
+
+st.header("Layout(布局)")
+
+st.header("SideBar")
+st.markdown("`st.sidebar`可以创建一个侧边栏, 而侧边栏添加内容需要对`st.sidebar`调用方法")
+st.markdown("例如想要在侧边栏添加一个`selectbox`，则需要调用`st.sidebar.selectbox`")
+
+st.code('''add_selectbox = st.sidebar.selectbox(
+    'How would you like to be contacted?',
+    ('Email', 'Home phone', 'Mobile phone')
+)
+''')
+
+add_selectbox = st.sidebar.selectbox(
+    'How would you like to be contacted?',
+    ('Email', 'Home phone', 'Mobile phone')
+)
+
+st.subheader("Column")
+st.markdown('`st.column`可以将App的布局进行分栏, 从而可以利用其对App布局')
+
+st.code('''left_column, right_column = st.columns(2)
+
+left_column.button('Press me!')
+with right_column:
+    chosen = st.radio(
+        'Sorting hat',
+        ("Gryffindor", "Ravenclaw", "Hufflepuff", "Slytherin")
+    )
+    st.write(f"You are in {chosen} house!")''')
+
+left_column, right_column = st.columns(2)
+
+left_column.button('Press me!')
+with right_column:
+    chosen = st.radio(
+        'Sorting hat',
+        ("Gryffindor", "Ravenclaw", "Hufflepuff", "Slytherin")
+    )
+    st.write(f"You are in {chosen} house!")
+
+
+st.markdown("*感谢可以读到这里，愿梦想成真！*")
+st.markdown('---')
+
+# # Add a placeholder
+# latest_iteration = st.empty()
+# bar = st.progress(0)
+
+# for i in range(100):
+#   # Update the progress bar with each iteration.
+#   latest_iteration.text(f'Iteration {i+1}')
+#   bar.progress(i + 1)
+#   time.sleep(0.1)
