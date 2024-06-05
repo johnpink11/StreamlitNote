@@ -3,8 +3,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 from datetime import time, datetime
-
-st.header('John的Streamlit笔记', divider='rainbow')
+st.title('John的Streamlit笔记')
 
 
 st.header("st.write")
@@ -264,16 +263,87 @@ with right_column:
     )
     st.write(f"You are in {chosen} house!")
 
+st.subheader("expander(创建可折叠块)")
 
-st.markdown("*感谢可以读到这里，愿梦想成真！*")
+st.code('''with st.expander("What is a prime number?"):
+    st.markdown("Prime number is an integer which only has 1 and itself as its factors.")
+''')
+
+with st.expander("What is a prime number?"):
+    st.markdown("Prime number is an integer which only has 1 and itself as its factors.")
+
+st.markdown("> *种一棵树最好的时间是十年前，其次是现在。*")
 st.markdown('---')
 
-# # Add a placeholder
+st.header("Show progress(为过程展示进度条)")
+
+st.markdown("`st.progress`可以创建一个进度条，其用法如下")
+st.code('''import time
+# Add a placeholder
+latest_iteration = st.empty()
+bar = st.progress(0)
+
+for i in range(100):
+  # Update the progress bar with each iteration.
+  latest_iteration.text(f"{i + 1}%") 
+  bar.progress(i + 1)
+  time.sleep(0.1)
+''')
+
+# import time 
+# # # Add a placeholder
 # latest_iteration = st.empty()
 # bar = st.progress(0)
 
 # for i in range(100):
 #   # Update the progress bar with each iteration.
-#   latest_iteration.text(f'Iteration {i+1}')
+#   latest_iteration.text(f"{i + 1}%") 
 #   bar.progress(i + 1)
 #   time.sleep(0.1)
+
+
+st.header("`st.latex`(书写数学公式)")
+st.latex(r'''
+a^2 + b^2 = c^2
+''')
+st.markdown("`st.latex`与`st.code`用法完全相同，只不过传入的字符串要是LaTeX的格式")
+
+
+st.header("Caching(缓存数据)")
+st.markdown("对于一个读取数据或者生成数据的过程，如果每次streamlit页面刷新都要重新加载一边,则会严重影响加载速率，利用`cache`对函数进行缓存，保存函数运行结果")
+st.markdown("Example:")
+st.code('''@st.cache_data
+def long_running_function(param1, param2):
+    return ...
+''')
+st.markdown('当一个函数被修饰为`st.cache_data`时，Streamlit会记录这个函数的以下内容\n')
+st.markdown('- 函数名`long_running_function\n - 输入参数(`param1`, `param2`) \n - 函数体内的代码')
+
+st.markdown("当Streamlit运行这个`long_running_function`函数时, Streamlit并不是直接执行函数体中的代码，而是检查此输入参数下该函数的数据有没有被缓存，如果已经缓存过，则直接返回已有的数据")
+
+st.markdown("**Example:**")
+st.code('''@st.cache_data
+def load_data(url):
+    df = pd.read_csv(url)  # 👈 Download the data
+    return df
+
+
+
+df = load_data("https://github.com/plotly/datasets/raw/master/uber-rides-data1.csv")
+st.dataframe(df)
+
+st.button("Rerun")''')
+
+@st.cache_data
+def load_data(url):
+    df = pd.read_csv(url)  # 👈 Download the data
+    return df
+
+
+
+df = load_data("https://github.com/plotly/datasets/raw/master/uber-rides-data1.csv")
+st.dataframe(df)
+
+st.button("Rerun")
+
+st.markdown("试试点击Rerun, 页面会很快的重新加载，上面代码从一个url读取大量数据，如果不使用`st.cache_data`缓存数据，则每次页面刷新都要重新读取")
