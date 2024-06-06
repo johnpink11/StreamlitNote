@@ -138,7 +138,16 @@ sniffio==1.3.1
 soupsieve==2.5
 starlette==0.37.2
 streamlit==1.35.0
+streamlit-camera-input-live==0.2.0
+streamlit-card==1.0.2
+streamlit-embedcode==0.1.2
 streamlit-extras==0.4.3
+streamlit-faker==0.0.3
+streamlit-image-coordinates==0.1.9
+streamlit-keyup==0.2.4
+streamlit-pandas-profiling==0.1.3
+streamlit-toggle-switch==1.0.2
+streamlit-vertical-slider==2.5.5
 tenacity==8.3.0
 terminado==0.18.1
 threadpoolctl==3.5.0
