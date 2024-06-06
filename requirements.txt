@@ -112,11 +112,6 @@ opencv-python==4.9.0.80
 opt-einsum==3.3.0
 orjson==3.10.3
 overrides==7.7.0
-paddle2onnx==1.0.9
-paddlefsl==1.1.0
-paddlehub==2.4.0
-paddlenlp==2.6.1
-paddlepaddle==2.6.1
 pandas==2.2.2
 pandas-profiling==3.6.6
 pandocfilters==1.5.1
