@@ -171,7 +171,6 @@ streamlit-extras==0.4.3
 streamlit-faker==0.0.3
 streamlit-image-coordinates==0.1.9
 streamlit-keyup==0.2.4
-streamlit-pandas-profiling==0.1.3
 streamlit-toggle-switch==1.0.2
 streamlit-vertical-slider==2.5.5
 tenacity==8.3.0
@@ -193,7 +192,7 @@ urllib3==2.2.1
 uvicorn==0.29.0
 uvloop==0.19.0
 validators==0.28.3
-visions==0.7.6
+visions==0.7.1
 visualdl==2.5.3
 watchdog==4.0.1
 watchfiles==0.21.0
