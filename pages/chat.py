@@ -5,17 +5,16 @@ st.title("ChatGPT-like clone")
 
 # Set OpenAI API key from Streamlit secrets
 client = OpenAI(
-    base_url="https://api.xty.app/v1", 
+    base_url="https://api.deepseek.com", 
     api_key=st.secrets["OPENAI_API_KEY"],
     http_client=httpx.Client(
-        base_url="https://api.xty.app/v1",
+        base_url="https://api.deepseek.com",
         follow_redirects=True,
     ),
 )
 
 # Set a default model
-if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+model = "deepseek-chat"
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -35,7 +34,7 @@ if prompt := st.chat_input("What is up?"):
     # Display assistant response in chat message container
     with st.chat_message("ai"):
         stream = client.chat.completions.create(
-            model=st.session_state["openai_model"],
+            model=model,
             messages=[
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
