@@ -1,7 +1,8 @@
 import streamlit as st
 from openai import OpenAI
 import httpx
-st.title("ChatGPT-like clone")
+st.title("Chat model")
+st.markdown('全新接入Deepseek-V3聊天模型，欢迎体验！')
 
 # Set OpenAI API key from Streamlit secrets
 client = OpenAI(
