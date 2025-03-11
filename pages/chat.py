@@ -7,7 +7,7 @@ st.markdown('全新接入Deepseek-V3聊天模型，欢迎体验！')
 # Set OpenAI API key from Streamlit secrets
 client = OpenAI(
     base_url="https://api.deepseek.com", 
-    api_key=st.secrets["OPENAI_API_KEY"],
+    api_key=st.secrets["DEEPSEEK_API_KEY"],
     http_client=httpx.Client(
         base_url="https://api.deepseek.com",
         follow_redirects=True,
